@@ -58,6 +58,7 @@ export const ResetPasswordPage = () => {
           value={password}
           required
           type='text'
+          maxLength={20}
         />
       </label>
       <label>
@@ -67,6 +68,7 @@ export const ResetPasswordPage = () => {
           value={confirmPassword}
           required
           type='text'
+          maxLength={20}
         />
       </label>
       <button>reset password</button>

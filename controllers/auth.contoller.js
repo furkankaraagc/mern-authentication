@@ -42,9 +42,10 @@ exports.login = async (req, res, next) => {
   try {
     const user = await User.findOne({ email }).select("+password");
     if (!user) {
-      return res
-        .status(404)
-        .json({ success: false, error: "invalid credentials" });
+      return res.status(404).json({
+        success: false,
+        error: "We can't find an account with this email address.",
+      });
     }
 
     async function checkUser(password) {
@@ -53,7 +54,7 @@ exports.login = async (req, res, next) => {
       if (!match) {
         return res
           .status(404)
-          .json({ success: false, error: "password does not match" });
+          .json({ success: false, error: "Password does not match" });
       }
 
       sendToken(user, 200, res);
@@ -94,8 +95,6 @@ exports.forgotPassword = async (req, res, next) => {
         .status(200)
         .json({ success: true, data: "Email Sent.Please check your email." });
     } catch (error) {
-      console.log(error);
-
       user.resetPasswordToken = undefined;
       user.resetPasswordExpire = undefined;
 
@@ -123,8 +122,6 @@ exports.resetPassword = async (req, res, next) => {
     user.resetPasswordExpire = undefined;
 
     await user.save();
-    //jwt leri modele ekle
-    console.log("kayıtsonrası");
     res.status(201).json({
       success: true,
       data: "password updated",
@@ -141,5 +138,7 @@ const sendToken = (user, statusCode, res) => {
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
     expiresIn: "2h",
   });
-  res.status(statusCode).json({ success: true, token: token });
+  res
+    .status(statusCode)
+    .json({ success: true, token: token, username: user.username });
 };

@@ -27,5 +27,10 @@ export const PrivatePage = () => {
     fetchPrivateData();
   }, []);
 
-  return <div>{privateData}</div>;
+  return (
+    <div>
+      <p className='text-4xl p-5 mt-8'>Private Page</p>
+      <div className=' text-2xl p-5'>{privateData}</div>
+    </div>
+  );
 };

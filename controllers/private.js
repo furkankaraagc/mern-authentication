@@ -1,6 +1,6 @@
 exports.getPrivateData = (req, res) => {
   res.status(200).json({
     sucess: true,
-    data: "you have access the private data",
+    data: "You have access the private page",
   });
 };

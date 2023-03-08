@@ -39,6 +39,7 @@ export const LoginPage = ({ setIsLoggedIn }) => {
         .then((data) => {
           if (data.success === true) {
             localStorage.setItem("authToken", data.token);
+            localStorage.setItem("username", data.username);
             setIsLoggedIn(true);
             navigate("/private");
           } else {
@@ -53,32 +54,53 @@ export const LoginPage = ({ setIsLoggedIn }) => {
   return (
     <>
       <div>
-        <form onSubmit={logingHandler}>
-          <h1>Login Page</h1>
-          {error && <span>{error}</span>}
-          <div>
-            <label>
-              Email
+        <form onSubmit={logingHandler} className='  flex flex-col mt-10'>
+          <p className='text-4xl p-5 '>Log In</p>
+          {error && (
+            <span className='border-2 border-red-600  rounded  text-red-600 p-2 ml-4 w-fit my-3'>
+              ! {error}
+            </span>
+          )}
+          <div className='flex flex-col mt-5 gap-3 p-5'>
+            <div className='flex flex-col gap-1'>
+              <label>Email</label>
               <input
+                className='border shadow-md border-solid rounded border-black pl-2 py-1 '
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
                 required
                 type='email'
+                maxLength={50}
               />
-            </label>
-
-            <label>
-              Password
+            </div>
+            <div className='flex flex-col gap-1'>
+              <label>Password</label>
               <input
+                className=' rounded shadow-md border border-solid border-black pl-2 py-1'
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 required
-                type='text'
+                type='password'
+                maxLength={20}
               />
-            </label>
-            <Link to='/forgotPassword'>Forgot Password</Link>
+            </div>
 
-            <button>login</button>
+            <button className=' bg-orange-500 rounded shadow-md   text-white border-solid border-black border p-1 mt-2 hover:opacity-90'>
+              Login
+            </button>
+            <Link
+              className='mt-4 hover:text-orange-500 w-fit'
+              to='/forgotPassword'
+            >
+              Forgot Password?
+            </Link>
+            <div>
+              Don't have and account?
+              <Link className='hover:text-orange-500' to='/register '>
+                {" "}
+                Register
+              </Link>
+            </div>
           </div>
         </form>
       </div>

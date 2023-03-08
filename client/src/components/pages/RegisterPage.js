@@ -64,48 +64,63 @@ export const RegisterPage = ({ setIsLoggedIn }) => {
 
   return (
     <div>
-      <form onSubmit={registerHandler}>
-        <h1>Register Page</h1>
-        {error && <span>{error}</span>}
-        <div>
-          <label>
-            Email
+      <form onSubmit={registerHandler} className='flex flex-col mt-10'>
+        <p className='text-4xl p-5'>Register</p>
+        {error && (
+          <span className=' bg-orange-500 text-white rounded p-2 my-3'>
+            {error}
+          </span>
+        )}
+        <div className='flex flex-col mt-5 gap-3 p-5'>
+          <div className='flex flex-col gap-1 '>
+            <label>Email</label>
             <input
+              className='border shadow-md  rounded border-solid border-black pl-2 py-1'
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               required
-              type='text'
+              type='email'
+              maxLength={50}
             />
-          </label>
-          <label>
-            Username
+          </div>
+          <div className='flex flex-col gap-1'>
+            <label>Username</label>
             <input
+              className='rounded shadow-md border border-solid border-black pl-2 py-1'
               onChange={(e) => setUsername(e.target.value)}
               value={username}
               required
               type='text'
+              maxLength={20}
             />
-          </label>
-
-          <label>
-            Password
+          </div>
+          <div className='flex flex-col gap-1'>
+            <label>Password</label>
             <input
+              className=' rounded shadow-md border border-solid border-black pl-2 py-1'
               onChange={(e) => setPassword(e.target.value)}
               value={password}
               required
-              type='text'
+              type='password'
+              placeholder='6+ characters'
+              maxLength={20}
             />
-          </label>
-          <label>
-            Confirm Password
+          </div>
+          <div className='flex flex-col gap-1'>
+            <label>Confirm Password</label>
             <input
+              className='rounded shadow-md border border-solid border-black pl-2 py-1'
               onChange={(e) => setConfirmPassword(e.target.value)}
               value={confirmPassword}
               required
-              type='text'
+              type='password'
+              placeholder='6+ characters'
+              maxLength={20}
             />
-          </label>
-          <button>Register</button>
+          </div>
+          <button className='rounded shadow-md bg-orange-500 text-white border-solid border-black border p-1 mt-2 hover:opacity-90'>
+            Register
+          </button>
         </div>
       </form>
     </div>

@@ -1,7 +1,0 @@
-.hoverLogin {
-  display: none;
-}
-.loginOrRegister:hover > div {
-  display: block;
-  text-decoration: none;
-}
